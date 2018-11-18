@@ -1,35 +1,35 @@
 import numpy as np
 import cv2
 import os
+import src.Funzioni as funzioni
 import matplotlib.pyplot as plt
 
+"""
+FIle per effettura la rettificazione di due pair immagini
 
-def leggi_da_file_matrici(folder , nome_file):
+"""
+# =======================================================================
 
-    mtx = np.load(folder + nome_file)
+Folder_save_calib = '/home/giuseppe/Scrivania/ResultCalib'  # cartella dove salvare  i risultati delle matrici di rettificazione
+Folder_to_save_rect = '/home/giuseppe/Scrivania/ResultRect' # cartella su cui salvare i risultati della rettificazione
 
-    return mtx
+# Nome delle due immagini da rettificare
+nome_img_left = "/home/giuseppe/Scrivania/"
+nome_img_right = "/home/giuseppe/Scrivania/"
 
 # =======================================================================
 
-path_folder = '/home/giuseppe/Scrivania'
-
-Folder_save_calib = '/home/giuseppe/Scrivania/ResultCalib'
-#i = 1 # indice dell immagine destra e sinistra da considerare
-
-# =======================================================================
-
-im_left = cv2.imread(os.path.join(path_folder, "left/left%d.png"%1))
-im_right = cv2.imread(os.path.join(path_folder, "right/right%d.png"%1))
+im_left = cv2.imread(nome_img_left)
+im_right = cv2.imread(nome_img_right)
 
 
 # LETTURA DELLE MATRICI
-mtx_left = leggi_da_file_matrici(Folder_save_calib , "/Matrice_Intrinseca_Sx.npy")
-mtx_right = leggi_da_file_matrici(Folder_save_calib , "/Matrice_Intrinseca_Dx.npy")
-dist_left = leggi_da_file_matrici(Folder_save_calib , "/Matrice_Distorsione_Sx.npy")
-dist_right = leggi_da_file_matrici(Folder_save_calib , "/Matrice_Distorsione_Dx.npy")
-R = leggi_da_file_matrici(Folder_save_calib , "/R.npy")
-T = leggi_da_file_matrici(Folder_save_calib , "/T.npy")
+mtx_left = funzioni.leggi_da_file_matrici(Folder_save_calib , "/Matrice_Intrinseca_Sx.npy")
+mtx_right = funzioni.leggi_da_file_matrici(Folder_save_calib , "/Matrice_Intrinseca_Dx.npy")
+dist_left = funzioni.leggi_da_file_matrici(Folder_save_calib , "/Matrice_Distorsione_Sx.npy")
+dist_right = funzioni.leggi_da_file_matrici(Folder_save_calib , "/Matrice_Distorsione_Dx.npy")
+R = funzioni.leggi_da_file_matrici(Folder_save_calib , "/R.npy")
+T = funzioni.leggi_da_file_matrici(Folder_save_calib , "/T.npy")
 
 # R1 --> output 3x3 matrix, rectification transform (rotation matrix) for the first camera
 R1 = np.zeros((3,3))
@@ -52,11 +52,20 @@ cv2.stereoRectify(
    dist_left,
    mtx_right,
    dist_right,
-   (im_left.shape[1], im_right.shape[0]),
+   (640,480),
    R,T,
    R1,R2,P1,P2,
    Q,
-   flags = cv2.CALIB_ZERO_DISPARITY) #last 4 parameters point to inizialized output variables
+   flags = cv2.CALIB_ZERO_DISPARITY)
+#con il flag calib zero disparity facciamo in modo che i centri delle due telecamere coincidono tra loro --> cy1 == cy2
+#questo dovrebbe grarantire che oggetti molto distanti tra loro hanno diparità zero.
+#ricorda oggetti vicini hanno disparità alta oggetti lontani bassa
+
+
+funzioni.Salva_su_file(Folder_to_save_rect, "/Matrice_R1.npy", R1)
+funzioni.Salva_su_file(Folder_to_save_rect, "/Matrice_R2.npy", R2)
+funzioni.Salva_su_file(Folder_to_save_rect, "/Matrice_P1.npy", P1)
+funzioni.Salva_su_file(Folder_to_save_rect, "/Matrice_P2.npy", P2)
 
 
 map1_x,map1_y=cv2.initUndistortRectifyMap(mtx_left, dist_left, R1, P1, (im_left.shape[1],im_left.shape[0]), cv2.CV_32FC1)
@@ -74,6 +83,6 @@ plt.figure(figsize=(10,4))
 plt.imshow(out[...,::-1])
 plt.show()
 
-
-cv2.imwrite('/home/giuseppe/Scrivania/ret_right.png',im_right_remapped)
-cv2.imwrite('/home/giuseppe/Scrivania/ret_left.png',im_left_remapped)
+#TODO: migliorere l interfaccia il nome del file
+cv2.imwrite('/home/giuseppe/Scrivania/ret_right2.png',im_right_remapped)
+cv2.imwrite('/home/giuseppe/Scrivania/ret_left2.png',im_left_remapped)

@@ -2,26 +2,42 @@ import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 
+
+
+def Salva_su_file(folder, nome_file, elemento_da_salvare):
+    np.save(folder + nome_file, elemento_da_salvare)
+
 # !!!!!!!
-min_disp = 1
-num_disp = 255-min_disp
-stereoProcessor = cv2.StereoSGBM_create(minDisparity=0, numDisparities=128, blockSize=21);
+maxDisp = 128
+stereoProcessor = cv2.StereoSGBM_create(minDisparity=0, numDisparities=maxDisp, blockSize=9)
 
 # Load the left and right images in gray scale
-imgLeft = cv2.imread('/home/giuseppe/Scrivania/ret_left.png', 0)
-imgRight = cv2.imread('/home/giuseppe/Scrivania/ret_right.png', 0)
-print(imgLeft.shape)
+imgLeft = cv2.imread('/home/giuseppe/Scrivania/ret_left2.png', 1)
+imgRight = cv2.imread('/home/giuseppe/Scrivania/ret_right2.png', 1)
 
+gray_left = cv2.cvtColor(imgLeft, cv2.COLOR_BGR2GRAY)
+gray_right = cv2.cvtColor(imgRight, cv2.COLOR_BGR2GRAY)
 
+disparity = stereoProcessor.compute(gray_left, gray_right)
+#filtro per il rumore
+cv2.filterSpeckles(disparity, 0 , 4000, maxDisp)
+
+#se la disparity è zero(oggetti distanti)  sparali
+_, disparity = cv2.threshold(disparity, 0, maxDisp*16, cv2.THRESH_TOZERO)
+disparity_scaled = (disparity /16).astype(np.uint8)
+d = (disparity_scaled * (255. / maxDisp)).astype(np.uint8)
 disparity = stereoProcessor.compute(imgLeft, imgRight)
-cv2.filterSpeckles(disparity, 0, 4000, 128)
+cv2.filterSpeckles(disparity, 0, 4000, maxDisp)
 
-_, disparity = cv2.threshold(disparity, 0, 128 * 16, cv2.THRESH_TOZERO)
+_, disparity = cv2.threshold(disparity, 0, maxDisp * 16, cv2.THRESH_TOZERO)
 disparity_scaled = (disparity / 16).astype(np.uint8)
+d = (disparity_scaled * (255. / maxDisp)).astype(np.uint8)
 
-cv2.imshow('A', (disparity_scaled * (256. / 128)).astype(np.uint8));
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+cv2.imwrite('/home/giuseppe/Scrivania/Disp2.png',d)
+
+Folder = '/home/giuseppe/Scrivania'
+Salva_su_file(Folder, "/Matrice_disp2.npy", d)
+
 
 
 
