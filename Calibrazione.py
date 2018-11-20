@@ -15,7 +15,7 @@ Permette di effettuare la calibrazione della propria camera e quindi di ottenere
 
 """
 
-# ==========================================================================
+# == GESTIONE ===============================================================
 
 # Percorso del DataSet delle immagini per effettuare la calibrazione
 # Ci devono essere almeno 10 immagini per avere una buona calibrazione

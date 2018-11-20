@@ -16,9 +16,6 @@ print("Exposure:"+str(cap.get(cv2.CAP_PROP_EXPOSURE)))
 print("White Balance U:"+str(cap.get(cv2.CAP_PROP_WHITE_BALANCE_BLUE_U)))
 print("White Balance V:"+str(cap.get(cv2.CAP_PROP_WHITE_BALANCE_RED_V)))
 
-c = cap.get(cv2.CAP_PROP_WHITE_BALANCE_BLUE_U)
-
-cap.set(cv2.CAP_PROP_WHITE_BALANCE_RED_V,0)
 
 
 
