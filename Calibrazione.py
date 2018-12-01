@@ -14,7 +14,6 @@ Permette di effettuare la calibrazione della propria camera e quindi di ottenere
  2- Le immagini, sia di Sx che Rx, devono essere 10
 
 """
-
 # == GESTIONE ===============================================================
 
 # Percorso del DataSet delle immagini per effettuare la calibrazione
@@ -49,83 +48,96 @@ all_3D_objpoints = [] # 3d point in real world space
 all_left_corners = []
 all_right_corners = []
 
-# minimo 10 foto per la calibrazione
-idx = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-for i in idx:
+try:
+    nR = os.list(pathRight)
+    nL = os.list(pathLeft)
 
-    # acquire the images
+    if nR != 10:
+        raise Exception("Numero minore di 10 nella cartella della camere di detra")
+    if nL != 10:
+        raise Exception("Numero minore di 10 nella cartella della camere di detra")
+
+    # minimo 10 foto per la calibrazione
+    idx = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    for i in idx:
+
+        # acquire the images
+        imgLeft = cv2.imread(os.path.join(pathLeft, "left%d.png"%i))
+        imgRight = cv2.imread(os.path.join(pathRight, "right%d.png"%i))
+
+        # conversion in to gray scale
+        grayLeft = cv2.cvtColor(imgLeft, cv2.COLOR_BGR2GRAY)
+        grayRight = cv2.cvtColor(imgRight, cv2.COLOR_BGR2GRAY)
+
+        # Cerchiamo all interno delle immagini il pattern della scacchiera.
+        # ret     --> restituisce un boolenano (True, False) se il pattern è stato o meno trovato all interno dell immagine
+        # corners --> restituisce un array di array contenente i punti 2D , in coordinate pixel, dei corner della scacchiera trovata
+        #             avendo una schacchiera 9x6 avremo 54 vettori di dimensione 1x2 --> [ coordin. x   coordinata y ]
+        ret_left , left_corners = cv2.findChessboardCorners(grayLeft, (nCol, nRow))
+        ret_right, right_corners = cv2.findChessboardCorners(grayRight, (nCol, nRow))
+
+
+        # Se il pattern è stato trovato li aggiungiamo all array totale
+        if ret_left and ret_right:
+
+            all_left_corners.append(cv2.cornerSubPix(grayLeft, left_corners, (11, 11), (-1, -1), criteria))
+            all_right_corners.append(cv2.cornerSubPix(grayRight, right_corners, (11, 11), (-1, -1), criteria))
+            all_3D_objpoints.append(objp) #i punti 3D saranno sempre quelli
+
+
     imgLeft = cv2.imread(os.path.join(pathLeft, "left%d.png"%i))
     imgRight = cv2.imread(os.path.join(pathRight, "right%d.png"%i))
 
     # conversion in to gray scale
     grayLeft = cv2.cvtColor(imgLeft, cv2.COLOR_BGR2GRAY)
     grayRight = cv2.cvtColor(imgRight, cv2.COLOR_BGR2GRAY)
+    print(grayLeft)
+    # Calcolo i parametri intrinseci ed estrinsecio della camera sia di destra sia di sinistra:
+    #                mtx   --> matrice dei parametri intrinseci
+    #                dist  --> matrice di distrosione
+    #                rvecs --> matrice di rotazione
+    #                tvecs --> matrice di traslazione
+    #
+    e1, mtx_left, dist_left, rvecs_left, tvecs_left = cv2.calibrateCamera(all_3D_objpoints, all_left_corners, (grayLeft.shape[1],grayLeft.shape[0]), None, None)
+    e2, mtx_right, dist_right, rvecs_right, tvecs_right = cv2.calibrateCamera(all_3D_objpoints, all_right_corners, (grayRight.shape[1],grayRight.shape[0]), None, None)
 
-    # Cerchiamo all interno delle immagini il pattern della scacchiera.
-    # ret     --> restituisce un boolenano (True, False) se il pattern è stato o meno trovato all interno dell immagine
-    # corners --> restituisce un array di array contenente i punti 2D , in coordinate pixel, dei corner della scacchiera trovata
-    #             avendo una schacchiera 9x6 avremo 54 vettori di dimensione 1x2 --> [ coordin. x   coordinata y ]
-    ret_left , left_corners = cv2.findChessboardCorners(grayLeft, (nCol, nRow))
-    ret_right, right_corners = cv2.findChessboardCorners(grayRight, (nCol, nRow))
-
-
-    # Se il pattern è stato trovato li aggiungiamo all array totale
-    if ret_left and ret_right:
-
-        all_left_corners.append(cv2.cornerSubPix(grayLeft, left_corners, (11, 11), (-1, -1), criteria))
-        all_right_corners.append(cv2.cornerSubPix(grayRight, right_corners, (11, 11), (-1, -1), criteria))
-        all_3D_objpoints.append(objp) #i punti 3D saranno sempre quelli
-
-imgLeft = cv2.imread(os.path.join(pathLeft, "left%d.png"%i))
-imgRight = cv2.imread(os.path.join(pathRight, "right%d.png"%i))
-
-# conversion in to gray scale
-grayLeft = cv2.cvtColor(imgLeft, cv2.COLOR_BGR2GRAY)
-grayRight = cv2.cvtColor(imgRight, cv2.COLOR_BGR2GRAY)
-print(grayLeft)
-# Calcolo i parametri intrinseci ed estrinsecio della camera sia di destra sia di sinistra:
-#                mtx   --> matrice dei parametri intrinseci
-#                dist  --> matrice di distrosione
-#                rvecs --> matrice di rotazione
-#                tvecs --> matrice di traslazione
-#
-e1, mtx_left, dist_left, rvecs_left, tvecs_left = cv2.calibrateCamera(all_3D_objpoints, all_left_corners, (grayLeft.shape[1],grayLeft.shape[0]), None, None)
-e2, mtx_right, dist_right, rvecs_right, tvecs_right = cv2.calibrateCamera(all_3D_objpoints, all_right_corners, (grayRight.shape[1],grayRight.shape[0]), None, None)
-
-# Calibrazione Stereo camera
-retval, _, _, _, _, R, T, E, F = cv2.stereoCalibrate( all_3D_objpoints,
-                                                      all_left_corners,
-                                                      all_right_corners,
-                                                      mtx_left,
-                                                      dist_left,
-                                                      mtx_right,
-                                                      dist_right,
-                                                      (grayLeft.shape[1],grayLeft.shape[0]),
-                                                      None,
-                                                      None,
-                                                      None,
-                                                      None,
-                                                      flags=cv2.CALIB_FIX_INTRINSIC, # mi concentro sulle matrici intrinseche
-                                                      criteria= criteria)
+    # Calibrazione Stereo camera
+    retval, _, _, _, _, R, T, E, F = cv2.stereoCalibrate( all_3D_objpoints,
+                                                          all_left_corners,
+                                                          all_right_corners,
+                                                          mtx_left,
+                                                          dist_left,
+                                                          mtx_right,
+                                                          dist_right,
+                                                          (grayLeft.shape[1],grayLeft.shape[0]),
+                                                          None,
+                                                          None,
+                                                          None,
+                                                          None,
+                                                          flags=cv2.CALIB_FIX_INTRINSIC, # mi concentro sulle matrici intrinseche
+                                                          criteria= criteria)
 
 
 
-# ======================== Salvataggio matrici di calibrazione =======================
+    # ======================== Salvataggio matrici di calibrazione =======================
 
-funzioni.Salva_su_file(Folder_save_calib , "/Matrice_Intrinseca_Dx.npy", mtx_right)
-funzioni.Salva_su_file(Folder_save_calib , "/Matrice_Intrinseca_Sx.npy", mtx_left)
-funzioni.Salva_su_file(Folder_save_calib , "/Matrice_Distorsione_Dx.npy", dist_right)
-funzioni.Salva_su_file(Folder_save_calib , "/Matrice_Distorsione_Sx.npy", dist_left)
+    funzioni.Salva_su_file(Folder_save_calib , "/Matrice_Intrinseca_Dx.npy", mtx_right)
+    funzioni.Salva_su_file(Folder_save_calib , "/Matrice_Intrinseca_Sx.npy", mtx_left)
+    funzioni.Salva_su_file(Folder_save_calib , "/Matrice_Distorsione_Dx.npy", dist_right)
+    funzioni.Salva_su_file(Folder_save_calib , "/Matrice_Distorsione_Sx.npy", dist_left)
 
-# =====================================================================================
+    # =====================================================================================
 
 
-# ======================== Salvataggio delle Stereocalibrazione =======================
+    # ======================== Salvataggio delle Stereocalibrazione =======================
 
-funzioni.Salva_su_file(Folder_save_calib , "/R.npy", R)
-funzioni.Salva_su_file(Folder_save_calib , "/T.npy", T)
-funzioni.Salva_su_file(Folder_save_calib , "/E.npy", E)
-funzioni.Salva_su_file(Folder_save_calib , "/F.npy", F)
+    funzioni.Salva_su_file(Folder_save_calib , "/R.npy", R)
+    funzioni.Salva_su_file(Folder_save_calib , "/T.npy", T)
+    funzioni.Salva_su_file(Folder_save_calib , "/E.npy", E)
+    funzioni.Salva_su_file(Folder_save_calib , "/F.npy", F)
 
-# ====================================================================================
+    # ====================================================================================
+
+except Exception as e:
+    print(e.message)
