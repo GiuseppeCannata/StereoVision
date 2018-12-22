@@ -1,7 +1,6 @@
 import numpy as np
 import cv2
 import os
-import src.Funzioni as funzioni #file dove salvo le funzioni per la scrittura e lettura su file
 
 """
 Permette di effettuare la calibrazione della propria camera e quindi di ottenere le matrici dei parametri  intrinseci ed estrinseci.
@@ -31,6 +30,9 @@ nRow = 6  # number of columns of chessboard -1
 dimSquare = 25  # dimensione del quadrato della scacchiera
 
 # ==========================================================================
+
+def Salva_su_file(folder, nome_file, elemento_da_salvare):
+    np.save(folder+ nome_file, elemento_da_salvare)
 
 # termination criteria
 criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, dimSquare, 0.001)
@@ -122,20 +124,20 @@ try:
 
     # ======================== Salvataggio matrici di calibrazione =======================
 
-    funzioni.Salva_su_file(Folder_save_calib , "/Matrice_Intrinseca_Dx.npy", mtx_right)
-    funzioni.Salva_su_file(Folder_save_calib , "/Matrice_Intrinseca_Sx.npy", mtx_left)
-    funzioni.Salva_su_file(Folder_save_calib , "/Matrice_Distorsione_Dx.npy", dist_right)
-    funzioni.Salva_su_file(Folder_save_calib , "/Matrice_Distorsione_Sx.npy", dist_left)
+    Salva_su_file(Folder_save_calib , "/Matrice_Intrinseca_Dx.npy", mtx_right)
+    Salva_su_file(Folder_save_calib , "/Matrice_Intrinseca_Sx.npy", mtx_left)
+    Salva_su_file(Folder_save_calib , "/Matrice_Distorsione_Dx.npy", dist_right)
+    Salva_su_file(Folder_save_calib , "/Matrice_Distorsione_Sx.npy", dist_left)
 
     # =====================================================================================
 
 
     # ======================== Salvataggio delle Stereocalibrazione =======================
 
-    funzioni.Salva_su_file(Folder_save_calib , "/R.npy", R)
-    funzioni.Salva_su_file(Folder_save_calib , "/T.npy", T)
-    funzioni.Salva_su_file(Folder_save_calib , "/E.npy", E)
-    funzioni.Salva_su_file(Folder_save_calib , "/F.npy", F)
+    Salva_su_file(Folder_save_calib , "/R.npy", R)
+    Salva_su_file(Folder_save_calib , "/T.npy", T)
+    Salva_su_file(Folder_save_calib , "/E.npy", E)
+    Salva_su_file(Folder_save_calib , "/F.npy", F)
 
     # ====================================================================================
 
