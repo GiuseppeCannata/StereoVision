@@ -1,6 +1,5 @@
 import numpy as np
 import cv2
-import src.Funzioni as funzioni
 
 """
 Calcolo della disparity tra due immagini.
@@ -19,7 +18,6 @@ nome_disp = '/home/giuseppe/Scrivania/Disp2.png'
 maxDisp = 128 # oggetti vicini alla camere
 min_disp = 0 # oggetti distanti alla camera
 block_size = 9 #dimansione della finestra che attraversa le immagini, deve essere dispari
-
 
 # =====================================================================================
 
