@@ -1,8 +1,9 @@
 import cv2
-
+import time
 from tkinter import * 
-import Messaggio as messaggio
 
+
+import Messaggio as messaggio
 import Preview as prev
 import ScattaFoto as scatta
 import GestioneLaser as laser
@@ -17,8 +18,9 @@ def Preview ():
 def Scatta():
     imgLeft , imgRight = scatta.funz()
     #salvataggio immagini
-    cv2.imwrite('../img/Left.png', imgLeft)
-    cv2.imwrite('../img/Right.png', imgRight)
+    #d --> day , B --> mese , y --> anno , H --> ore , M --> minuti , S --> secondi 
+    cv2.imwrite('../img/Left_'+time.strftime("%d_%B_%y:%H:%M:%S"), imgLeft)
+    cv2.imwrite('../img/Right_'+time.strftime("%d_%B_%y:%H:%M:%S"), imgRight)
     messaggio.funz("Immagini salvate")
 
 
