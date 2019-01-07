@@ -15,12 +15,12 @@ Per maggiore affidabilità dei risultati è stata quindi condatta una calibrazio
 
 -RETTIFICAZIONE
 Le immagini sono state in seguito rettificate affinchè punti omologhi potessero trovarsi sulla stessa line epipolare (linea in giallo in figura).
-<img src="https://github.com/GiuseppeCannata/StereoVision/blob/master/imgs/Rettificazione_Imgs.PNG"\>
+<img src="https://github.com/GiuseppeCannata/StereoVision/blob/master/imgs/Rettificazione_Imgs.PNG">
 
 -DETECT DEL LASER
 La ricerca del PUNTATORE laser avviene utilizzando lo spazio di colori RGB; In particolra il range di ricerca è tra il rosso puro e il bianco, quest'ultimo dovuto alla lucentezza del puntatore.
 Per limitare disturbi derivanti dalla scena la ricerca è stata coinata in una ROI(Region of interest).
-<img src="https://github.com/GiuseppeCannata/StereoVision/blob/master/imgs/ROI_Laser.PNG"\>
+<img src="https://github.com/GiuseppeCannata/StereoVision/blob/master/imgs/ROI_Laser.PNG">
 
 Il software è stato scritto interamente in linguaggio python
 <\p>
