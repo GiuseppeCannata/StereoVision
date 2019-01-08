@@ -41,14 +41,15 @@ f = distanza focale
 disp = valore di disparity cioè la differenza tra le coordinate x dei punti omologhi nell immagine di destra e sinistra.
 
 Non avendo i dati B e f per mancaza di Datasheets relativi alla fotocamera, e per l incertezza dei parametri ottenuti con la calibrazione, si è deciso di stimare il rapporto B*f:
-        <ul style="list-style:none;">
-          <li>Procedura:</li>
-          <li>1- Trovato il puntatore laser sia nell immagine di destra che in quella di sinistra sono state considerate le cordinate                    xR e XL.
+<br><br>
+Procedura:
+        <ul>
+          <li>Trovato il puntatore laser sia nell immagine di destra che in quella di sinistra sono state considerate le cordinate                    xR e XL.
           </li>
-          <li>2- Successivamente è stata calcolata la differenza tra le due coordinate, il valore ottenuto raffigura la disparity tra                    punti omologhi:
+          <li>Successivamente è stata calcolata la differenza tra le due coordinate, il valore ottenuto raffigura la disparity tra                    punti omologhi:
                                                           disp = |xL - xR|
           </li>
-          <li>3- ripetendo questi passaggi per distanze su un range da 20cm a 80cm , è stato poi overfittato generando il polinomio     
+          <li>ripetendo questi passaggi per distanze su un range da 20cm a 80cm , è stato poi overfittato generando il polinomio     
                  specifico.
           </li>
         </ul>
