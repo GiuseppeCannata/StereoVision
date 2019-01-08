@@ -5,8 +5,9 @@ Progetto realizzato per il laboratorio di Meccatronica presso l'Università poli
 corso di laurea Ing. Informatica e dell'Automazione.
 Il prototipo del misuratore è stato costruito con una StereoCamera collegata tramite USB alla Raspberry Pi 3.
 I due elementi sono poi stati fissati ad un supporto metallico per consentire una maggiore stabilità in fase di misurazione.
-
-
+<br>
+<img src="https://github.com/GiuseppeCannata/StereoVision/blob/master/imgs/Prototipo.PNG">
+<br>
 Per quanto riguarda il processo che ha portato allo sviluppo del software ci si è basati sui seguenti passaggi:
 
 <dl>
@@ -40,13 +41,18 @@ f = distanza focale
 disp = valore di disparity cioè la differenza tra le coordinate x dei punti omologhi nell immagine di destra e sinistra.
 
 Non avendo i dati B e f per mancaza di Datasheets relativi alla fotocamera, e per l incertezza dei parametri ottenuti con la calibrazione, si è deciso di stimare il rapporto B*f:
-        Procedura:
-        1- Trovato il puntatore laser sia nell immagine di destra che in quella di sinistra sono state considerate le cordinate xR e XL.
-        2- Successivamente è stata calcolata la differenza tra le due coordinate, il valore ottenuto raffigura la disparity tra punti   
-           omologhi:
+        <ul style="list-style:none;">
+          <li>Procedura:</li>
+          <li>1- Trovato il puntatore laser sia nell immagine di destra che in quella di sinistra sono state considerate le cordinate                    xR e XL.
+          </li>
+          <li>2- Successivamente è stata calcolata la differenza tra le due coordinate, il valore ottenuto raffigura la disparity tra                    punti omologhi:
                                                           disp = |xL - xR|
-        3- ripetendo questi passaggi per distanze su un range da 20cm a 80cm , è stato poi overfittato generando il polinomio specifico.
-
+          </li>
+          <li>3- ripetendo questi passaggi per distanze su un range da 20cm a 80cm , è stato poi overfittato generando il polinomio     
+                 specifico.
+          </li>
+        </ul>
+        
 Cosi facendo è stato generato il valore  5253.
 Questo ha permesso di riscrivere la form 1 (vista sopra) in questo modo:  distance(P) =  5253 / disp.  
 <br>
