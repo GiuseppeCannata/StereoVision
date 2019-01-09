@@ -6,7 +6,7 @@ corso di laurea Ing. Informatica e dell'Automazione.
 Il prototipo del misuratore è stato costruito con una StereoCamera collegata tramite USB alla Raspberry Pi 3.
 I due elementi sono poi stati fissati ad un supporto metallico per consentire una maggiore stabilità in fase di misurazione.
 <br>
-<img src="https://github.com/GiuseppeCannata/StereoVision/blob/master/imgs/Prototipo.PNG">
+<img src="https://github.com/GiuseppeCannata/StereoVision/blob/master/imgs/Prototipo.PNG" Hspace="320" Vspace="0">
 <br>
 Per quanto riguarda il processo che ha portato allo sviluppo del software ci si è basati sui seguenti passaggi:
 
@@ -21,7 +21,7 @@ Per maggiore affidabilità dei risultati è stata quindi condatta una calibrazio
 <dd>
 Le immagini sono state in seguito rettificate affinchè punti omologhi potessero trovarsi sulla stessa line epipolare (linea in giallo in figura).
 <br>
-<img src="https://github.com/GiuseppeCannata/StereoVision/blob/master/imgs/Rettificazione_Imgs.PNG">
+<img src="https://github.com/GiuseppeCannata/StereoVision/blob/master/imgs/Rettificazione_Imgs.PNG" Hspace="230" Vspace="0">
 </dd>
 
 <dt>-Detect del laser</dt>
@@ -29,7 +29,7 @@ Le immagini sono state in seguito rettificate affinchè punti omologhi potessero
 La ricerca del PUNTATORE laser avviene utilizzando lo spazio di colori RGB; In particolra il range di ricerca è tra il rosso puro e il bianco, quest'ultimo dovuto alla lucentezza del puntatore.
 Per limitare disturbi derivanti dalla scena la ricerca è stata coinata in una ROI(Region of interest).
 <br>
-<img src="https://github.com/GiuseppeCannata/StereoVision/blob/master/imgs/ROI_Laser.PNG">
+<img src="https://github.com/GiuseppeCannata/StereoVision/blob/master/imgs/ROI_Laser.PNG" Hspace="250" Vspace="0">
 </dd>
 
 <dt>-Distanza</dt>
@@ -57,7 +57,7 @@ Procedura:
 Cosi facendo è stato generato il valore  5253.
 Questo ha permesso di riscrivere la form 1 (vista sopra) in questo modo:  distance(P) =  5253 / disp.  
 <br>
-<img src="https://github.com/GiuseppeCannata/StereoVision/blob/master/imgs/Distanza.PNG">
+<img src="https://github.com/GiuseppeCannata/StereoVision/blob/master/imgs/Distanza.PNG" Hspace="240" Vspace="0">
 </dd>
 </dl>
 
