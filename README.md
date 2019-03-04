@@ -1,5 +1,7 @@
 # StereoVision
 
+<h4> 1. Spiegazione risultati raggiunti </h4>
+<br>
 <p>
 Progetto realizzato per il laboratorio di Meccatronica presso l'Università politecnica delle Marche 
 corso di laurea Ing. Informatica e dell'Automazione.
@@ -62,5 +64,22 @@ Questo ha permesso di riscrivere la form 1 (vista sopra) in questo modo:  distan
 </dl>
 
 Il software è stato scritto interamente in linguaggio python
+</p>
+<br><br>
+<h4> 2. Istallazione software </h4>
+<p>
+Per poter utilizzare l'applicativo è necessario scaricare la cartella Ranspberry e avviare il file Ranspberry/Misuratore/Main.py.
+<br><br>
+<b>Attenzione!</b>
+<br><br>
+L'applicativo richiama le matrici di calibrazione e rettificazione della StereoCamera connessa alla raspberry.
+<br>
+Nella cartella qui pushata ci sono i file .npy relativi alla <b>StereoCamera da me utilizzata</b>.
+<br>
+<i>(Possiamo trovarli rispettivamente nella cartella Ranspberry/ResultCalib  e Ranspberry/ResultRect)</i>
+<br><br>
+Per cui per poter utilizzare il software con una StereoCamera differente è bene generare le matrici di calibrazione e rettificazione ad hoc.
+<br>
+Per poterlo fare è possibile utilizzare i tools <i>Calibrazione.py</i> e <i>Ottieni_matrici_rettificazione.py</i>, e seguire le varie istruzioni presentate nella parte GESTIONE.
 </p>
 
