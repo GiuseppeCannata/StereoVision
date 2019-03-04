@@ -3,14 +3,21 @@ import cv2
 import os
 
 """
-Permette di effettuare la calibrazione della propria camera e quindi di ottenere le matrici dei parametri  intrinseci ed estrinseci.
+Permette di effettuare la calibrazione della propria camera e quindi di ottenere le matrici dei parametri intrinseci ed estrinseci.
 
 -Cose importanti:
- 1- Le immagini sia di destra che di sinistra che vengono utilizzate per la calibrazione devono essere nominate  
-    come
+
+ 1- Scattare le foto dalla propria StereoCamera e dividerle (solitamente una StereoCamera scatta un unica foto)
+ 2- Le immagini sia di destra che di sinistra che vengono utilizzate per la calibrazione devono essere nominate  
+    come segue:
+    
         left<numero_immagine>.png
         right<numero_immagine>.png
- 2- Le immagini, sia di Sx che Rx, devono essere 10
+    
+    Occhio! le immagini relative ad una stessa foto devono avere lo stesso numero cioè: FOTO-->LA DIVIDO--> Left1 e right1
+            l estensione è .png
+            
+ 3- Le immagini, sia di Sx che Rx, devono essere 10
 
 """
 # == GESTIONE ===============================================================
