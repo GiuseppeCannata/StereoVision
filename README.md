@@ -80,6 +80,6 @@ Nella cartella qui pushata ci sono i file .npy relativi alla <b>StereoCamera da 
 <br><br>
 Per cui per poter utilizzare il software con una StereoCamera differente è bene generare le matrici di calibrazione e rettificazione ad hoc.
 <br>
-Per poterlo fare è possibile utilizzare i tools <i>Calibrazione.py</i> e <i>Ottieni_matrici_rettificazione.py</i>, e seguire le varie istruzioni presentate nella parte GESTIONE.
+Per poterlo fare è possibile utilizzare i tools <i>Ottieni_matrici_calibrazione.py</i> e <i>Ottieni_matrici_rettificazione.py</i>, e seguire le varie istruzioni presentate nella parte GESTIONE.
 </p>
 
