@@ -82,4 +82,9 @@ Per cui per poter utilizzare il software con una StereoCamera differente è bene
 <br>
 Per poterlo fare è possibile utilizzare i tools <i>Ottieni_matrici_calibrazione.py</i> e <i>Ottieni_matrici_rettificazione.py</i>, e seguire le varie istruzioni presentate nella parte GESTIONE.
 </p>
+<br>
+<h4> 3. Documentazione </h4>
+<ol>
+  <li><a href="https://github.com/GiuseppeCannata/StereoVision/blob/master/Documentazione/Report finale.pdf"></a> </li>
+</ol>
 
