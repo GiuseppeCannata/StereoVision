@@ -85,6 +85,6 @@ Per poterlo fare è possibile utilizzare i tools <i>Ottieni_matrici_calibrazione
 <br>
 <h4> 3. Documentazione </h4>
 <ol>
-  <li><a href="https://github.com/GiuseppeCannata/StereoVision/blob/master/Documentazione/Report%20finale.pdf"></a> </li>
+  <li><a href="https://github.com/GiuseppeCannata/StereoVision/blob/master/Documentazione/Report%20finale.pdf">Relazione</a> </li>
 </ol>
 
