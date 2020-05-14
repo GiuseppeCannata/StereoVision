@@ -37,9 +37,10 @@ Per limitare disturbi derivanti dalla scena la ricerca è stata coinata in una R
 <dt>-Distanza</dt>
 <dd>
 Dalla teoria sappiamo che la distanza di un punto P della scena, viene calocolata per tringolazione attraverso la seguente formula:
-[!img] [https://latex.codecogs.com/gif.latex?distance%28P%29%20%3D%20%5Cfrac%7BB*f%7D%7Bdisp%7D]
-<br>                                             distance(P) = B*f / disp    (form 1)
-<br>
+<br><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+                                             distance(P) = B*f / disp    (form 1)
+<br><br>
 <ul>
 <li>B = è la baseline cioè la distanza tra i centri ottici delle due fotocamere</li>
 <li>f = distanza focale</li>
