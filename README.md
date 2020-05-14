@@ -37,26 +37,24 @@ Per limitare disturbi derivanti dalla scena la ricerca è stata coinata in una R
 <dt>-Distanza</dt>
 <dd>
 Dalla teoria sappiamo che la distanza di un punto P della scena, viene calocolata per tringolazione attraverso la seguente formula:
-                                              distance(P) = B*f / disp    (form 1)
+<br>                                             distance(P) = B*f / disp    (form 1)
 <br>
 <ul>
 <li>B = è la baseline cioè la distanza tra i centri ottici delle due fotocamere</li>
 <li>f = distanza focale</li>
 <li>disp = valore di disparity cioè la differenza tra le coordinate x dei punti omologhi nell immagine di destra e sinistra.</li>
 </ul>
-Non avendo i dati B e f per mancaza di Datasheets relativi alla fotocamera, e per l incertezza dei parametri ottenuti con la calibrazione, si è deciso di stimare il rapporto B*f:
-<br><br>
-Procedura:
-        <ul>
-          <li>Trovato il puntatore laser sia nell immagine di destra che in quella di sinistra sono state considerate le cordinate                    xR e XL.
-          </li>
-          <li>Successivamente è stata calcolata la differenza tra le due coordinate, il valore ottenuto raffigura la disparity tra                    punti omologhi:
-                                                          disp = |xL - xR|
-          </li>
-          <li>ripetendo questi passaggi per distanze su un range da 20cm a 80cm , è stato poi overfittato generando il polinomio     
-                 specifico.
-          </li>
-        </ul>
+Non avendo i dati B e f per mancaza di Datasheets relativi alla fotocamera, e per l incertezza dei parametri ottenuti con la calibrazione, si è deciso di stimare il rapporto B*f. Procedura:
+<ul>
+  <li>Trovato il puntatore laser sia nell immagine di destra che in quella di sinistra sono state considerate le cordinate                    xR e XL.
+  </li>
+  <li>Successivamente è stata calcolata la differenza tra le due coordinate, il valore ottenuto raffigura la disparity tra                    punti omologhi:
+                                                  disp = |xL - xR|
+  </li>
+  <li>ripetendo questi passaggi per distanze su un range da 20cm a 80cm , è stato poi overfittato generando il polinomio     
+         specifico.
+  </li>
+</ul>
         
 Cosi facendo è stato generato il valore  5253.
 Questo ha permesso di riscrivere la form 1 (vista sopra) in questo modo:  distance(P) =  5253 / disp.  
