@@ -37,11 +37,13 @@ Per limitare disturbi derivanti dalla scena la ricerca è stata coinata in una R
 <dt>-Distanza</dt>
 <dd>
 Dalla teoria sappiamo che la distanza di un punto P della scena, viene calocolata per tringolazione attraverso la seguente formula:
-                                                distance(P) = B*f / disp    (form 1)
-B = è la baseline cioè la distanza tra i centri ottici delle due fotocamere
-f = distanza focale
-disp = valore di disparity cioè la differenza tra le coordinate x dei punti omologhi nell immagine di destra e sinistra.
-
+                                              distance(P) = B*f / disp    (form 1)
+<br>
+<ul>
+<li>B = è la baseline cioè la distanza tra i centri ottici delle due fotocamere</li>
+<li>f = distanza focale</li>
+<li>disp = valore di disparity cioè la differenza tra le coordinate x dei punti omologhi nell immagine di destra e sinistra.</li>
+</ul>
 Non avendo i dati B e f per mancaza di Datasheets relativi alla fotocamera, e per l incertezza dei parametri ottenuti con la calibrazione, si è deciso di stimare il rapporto B*f:
 <br><br>
 Procedura:
@@ -65,7 +67,7 @@ Questo ha permesso di riscrivere la form 1 (vista sopra) in questo modo:  distan
 
 Il software è stato scritto interamente in linguaggio python
 </p>
-<br><br>
+<br>
 <h4> 2. Istallazione software </h4>
 <p>
 Per poter utilizzare l'applicativo è necessario scaricare la cartella Ranspberry e avviare il file Ranspberry/Misuratore/Main.py.
