@@ -60,7 +60,6 @@ Non avendo i dati B e f per mancaza di Datasheets relativi alla fotocamera, e pe
         
 Cosi facendo è stato generato il valore  5253.
 Questo ha permesso di riscrivere la form 1 (vista sopra) in questo modo:  
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  
 
                                                    distance(P) =  5253 / disp.  
 <br><br>
